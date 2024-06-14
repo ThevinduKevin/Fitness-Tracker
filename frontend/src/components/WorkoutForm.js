@@ -1,6 +1,9 @@
 import { useState } from "react"
+import { useWorkoutContext } from '../context/WorkoutContext'
+
 
 const WorkoutForm = () => {
+    const { dispatch } = useWorkoutContext
     const [title, setTitle] = useState('')
     const [load, setLoad] = useState('')
     const [reps, setReps] = useState('')
@@ -12,10 +15,10 @@ const WorkoutForm = () => {
 
         const workout = {title,load,reps}
 
-        const response = await fetch('/api/workout',{
+        const response = await fetch('/api/workouts',{
             method: 'POST',
             body: JSON.stringify(workout),
-            header: {
+            headers: {
                 'Content-Type': 'application/json'
             }
         })
@@ -24,12 +27,13 @@ const WorkoutForm = () => {
         if(!response.ok){
             setError(json.error)
         }
-        if(response.ok){
+        else{
             setTitle('')
             setLoad('')
             setReps('')
             setError(null)
             console.log('new workout added', json)
+            dispatch({type: 'CREATE_WORKOUT', payload: json})
         }
     }
 
@@ -65,3 +69,5 @@ const WorkoutForm = () => {
 }
 
 export default WorkoutForm
+
+
