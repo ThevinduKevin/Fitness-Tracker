@@ -72,7 +72,7 @@ const updateWorkout = async (req,res) => {
         return res.status(400).json({error: 'No such workout'})
     }
 
-    re.status(200).json(workout)
+    res.status(200).json(workout)
 }
 
 
