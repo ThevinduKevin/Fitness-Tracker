@@ -1,13 +1,12 @@
 import { useEffect } from 'react'
-import { useWorkoutContext } from '../context/WorkoutContext'
-
+import { useWorkoutsContext } from '../hooks/useWorkoutsContext';
 //components
 import WorkoutDetails from '../components/WorkoutDetails'
 import WorkoutForm from '../components/WorkoutForm'
 
 
 const Home = () => {
-    const {workouts, dispatch} = useWorkoutContext()
+    const {workouts, dispatch} = useWorkoutsContext()
 
     useEffect(() => {
         const fetchWorkouts = async () => {
